@@ -8,7 +8,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='WTForms-Ext',
-    version='0.2',
+    version='0.3',
     url='https://github.com/zengqiu/wtforms-ext',
     license='MIT',
     author='zengqiu',
@@ -34,6 +34,8 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
         'Topic :: Software Development :: Libraries :: Python Modules',
     ]
