@@ -8,7 +8,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='WTForms-Ext',
-    version='0.3',
+    version='0.4',
     url='https://github.com/zengqiu/wtforms-ext',
     license='MIT',
     author='zengqiu',
