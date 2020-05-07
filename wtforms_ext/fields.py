@@ -135,7 +135,7 @@ class NonValidatingSelectMultipleField(SelectMultipleField):
 
 
 # https://gist.github.com/dukebody/dcc371bf286534d546e9
-class JSONField(fields.StringField):
+class JSONField(StringField):
     def _value(self):
         return json.dumps(self.data) if self.data else ''
 
