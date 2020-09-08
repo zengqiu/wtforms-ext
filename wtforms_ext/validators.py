@@ -67,6 +67,39 @@ class AndRequiredWith(object):
                 raise ValidationError(message % d)
 
 
+class OnlyRequiredWith(object):
+    """用于验证多个表单字段只填一个"""
+    def __init__(self, fieldnames, message=None):
+        self.message = message
+        self.fieldnames = fieldnames
+        for fieldname in fieldnames:
+            setattr(self, fieldname, fieldname)
+
+    def __call__(self, form, field):
+        fields = list()
+        count = 0 if not field.data else 1
+        for fieldname in self.fieldnames:
+            try:
+                fields.append(form[getattr(self, fieldname)])
+                other = form[getattr(self, fieldname)]
+            except KeyError:
+                raise ValidationError(field.gettext("Invalid field name '%s'.") % getattr(self, fieldname))
+
+            if other.data:
+                count += 1
+
+            if count > 1:
+                self.fieldnames.append(field.name)
+
+                d = {
+                    'fieldnames': ', '.join(list(set(self.fieldnames)))
+                }
+                message = self.message
+                if message is None:
+                    message = field.gettext('Only one field is required in %(fieldnames)s.')
+                raise ValidationError(message % d)
+
+
 def validate_select_relation(original_field_name, keys=[u'其他', u'其它']):
     """
     用以验证 SelectField 选择制定选项时关联的扩展字段是否填写
